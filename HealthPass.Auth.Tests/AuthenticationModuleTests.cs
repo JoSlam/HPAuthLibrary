@@ -2,7 +2,6 @@ using HealthPass.Auth.Core;
 using HealthPass.Data.Entities;
 using HealthPass.Data.Entities.Interfaces;
 using HealthPassAuthLibrary;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;

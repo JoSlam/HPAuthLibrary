@@ -1,5 +1,4 @@
-﻿using HealthPass.Auth.Core;
-using HealthPass.Data.Entities;
+﻿using HealthPass.Data.Entities;
 using HealthPass.Data.Entities.Interfaces;
 
 namespace HealthPassAuthLibrary
@@ -32,7 +31,7 @@ namespace HealthPassAuthLibrary
             return "";
         }
 
-        //TODO: Consider swapping return with token for immediate access
+        //TODO: Consider swapping bool return with token for immediate access
         public bool RegisterUser(UserDetails userDetails)
         {
             //Check for existing user
