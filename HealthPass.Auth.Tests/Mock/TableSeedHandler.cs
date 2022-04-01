@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace HealthPass.Auth.Tests
+namespace HealthPass.Auth.Tests.Mock
 {
     public class TableSeedHandler
     {

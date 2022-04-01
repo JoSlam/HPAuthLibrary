@@ -1,4 +1,5 @@
 using HealthPass.Auth.Core;
+using HealthPass.Auth.Tests.Mock;
 using HealthPass.Data.Entities;
 using HealthPass.Data.Entities.Interfaces;
 using HealthPassAuthLibrary;

@@ -4,7 +4,7 @@ using Moq;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace HealthPass.Auth.Tests
+namespace HealthPass.Auth.Tests.Mock
 {
     public class MockDBContext: HealthPassContext
     {
