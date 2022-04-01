@@ -12,11 +12,7 @@ namespace HealthPass.Auth.Tests
         [TestInitialize]
         public void Initialize()
         {
-            loginManager = new LoginManager();
+            // Could not finish LoginManager tests #SadTimes 🙁
         }
-
-
-        [TestMethod]
-
     }
 }
