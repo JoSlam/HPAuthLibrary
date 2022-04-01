@@ -10,6 +10,7 @@ namespace HealthPass.Auth.Tests.Mock
     {
         private List<User> Users = new List<User>();
         private List<LoginDetails> LoginDetails = new List<LoginDetails>();
+        private List<BlockedSignature> BlockedSignatures = new List<BlockedSignature>();
         private readonly TableSeedHandler SeedHandler = new TableSeedHandler();
 
         public HealthPassContext BuildMockContext()
@@ -32,7 +33,18 @@ namespace HealthPass.Auth.Tests.Mock
                 details.ID = SeedHandler.GetNewID(details.GetType().Name);
             });
             mockLoginDetailsSet.Setup(m => m.Remove(It.IsAny<LoginDetails>())).Callback((LoginDetails user) => LoginDetails.Remove(user));
-            
+
+
+            // LoginDetails DBSet setup
+            var mockBlockedSignaturesSet = CreateDbSetMock(BlockedSignatures);
+            mockBlockedSignaturesSet.Setup(w => w.Add(It.IsAny<BlockedSignature>())).Callback((BlockedSignature blocked) =>
+            {
+                BlockedSignatures.Add(blocked);
+                blocked.ID = SeedHandler.GetNewID(blocked.GetType().Name);
+            });
+            mockBlockedSignaturesSet.Setup(m => m.Remove(It.IsAny<BlockedSignature>())).Callback((BlockedSignature blocked) => BlockedSignatures.Remove(blocked));
+
+
             Mock<HealthPassContext> mockDbContext = new Mock<HealthPassContext>();
             mockDbContext.Setup(i => i.Users).Returns(mockUsersSet.Object);
             mockDbContext.Setup(i => i.LoginDetails).Returns(mockLoginDetailsSet.Object);
