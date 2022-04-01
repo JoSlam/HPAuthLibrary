@@ -24,7 +24,7 @@ namespace HealthPass.Auth.Core
         public bool LoginUser(RequestDetails requestDetails, string email, string password)
         {
             User? user = GetUser(email);
-            if (user.IsLocked || RequestSignatureIsBlocked(requestDetails))
+            if (user.IsLocked || IsRequestSignatureBlocked(requestDetails))
             {
                 return false;
             }
@@ -38,6 +38,11 @@ namespace HealthPass.Auth.Core
         public bool RegisterUser(RequestDetails requestDetails, UserDetails userDetails)
         {
             return authModule.RegisterUser(userDetails);
+        }
+
+        public bool IsTokenValid(string token)
+        {
+            return tokenManager.IsTokenValid(token);
         }
 
 
@@ -91,7 +96,7 @@ namespace HealthPass.Auth.Core
             }
         }
 
-        private bool RequestSignatureIsBlocked(RequestDetails requestDetails)
+        private bool IsRequestSignatureBlocked(RequestDetails requestDetails)
         {
             string signature = GetRequestSignature(requestDetails);
             BlockedSignature? blockedSignature = dbContext.BlockedSignatures.SingleOrDefault(i => i.Signature == signature);
@@ -108,7 +113,9 @@ namespace HealthPass.Auth.Core
         {
             DateTime policyDate = DateTime.UtcNow.AddMinutes(-(lockoutCriteria.LockoutTime));
             List<LoginDetails> loginAttempts = dbContext.LoginDetails
-                .Where(i => i.RequestSignature == requestSignature && i.CreatedDateUTC >= policyDate)
+                .Where(i => i.RequestSignature == requestSignature
+                                && i.CreatedDateUTC >= policyDate
+                                && i.Success == false)
                 .ToList();
             return loginAttempts;
         }
@@ -116,7 +123,6 @@ namespace HealthPass.Auth.Core
         private void LockUser(User user)
         {
             Console.WriteLine($"Locked user: {user.Email} indefinitely.");
-            DateTime current = DateTime.UtcNow;
             user.IsLocked = true;
 
             dbContext.SaveChanges();

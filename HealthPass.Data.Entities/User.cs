@@ -10,8 +10,6 @@ namespace HealthPass.Data.Entities
         public int LoginAttempts { get; set; } = 0;
         
         public bool IsLocked { get; set; } = false;
-        //public DateTime? LockedDateUTC { get; set; }
-        //public DateTime? LockExpiryDateUTC { get; set; }
 
         private string PasswordHash;
 
