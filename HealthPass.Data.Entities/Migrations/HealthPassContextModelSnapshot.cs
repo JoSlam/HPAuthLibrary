@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthPass.Data.Entities.Migrations
 {
-    [DbContext(typeof(HealthPassContext))]
+    [DbContext(typeof(HealthPassDataContext))]
     partial class HealthPassContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

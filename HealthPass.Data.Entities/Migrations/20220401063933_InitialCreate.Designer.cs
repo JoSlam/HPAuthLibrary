@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthPass.Data.Entities.Migrations
 {
-    [DbContext(typeof(HealthPassContext))]
+    [DbContext(typeof(HealthPassDataContext))]
     [Migration("20220401063933_InitialCreate")]
     partial class InitialCreate
     {

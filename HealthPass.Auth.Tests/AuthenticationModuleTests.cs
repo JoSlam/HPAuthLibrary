@@ -13,7 +13,7 @@ namespace HealthPass.Auth.Tests
     public class AuthenticationModuleTests
     {
         AuthenticationModule authModule;
-        HealthPassContext mockDbContext;
+        HealthPassDataContext mockDbContext;
         User testUser;
 
 

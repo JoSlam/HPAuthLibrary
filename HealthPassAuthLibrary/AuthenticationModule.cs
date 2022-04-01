@@ -6,12 +6,12 @@ namespace HealthPassAuthLibrary
 {
     public class AuthenticationModule
     {
-        private readonly HealthPassContext context;
+        private readonly HealthPassDataContext context;
         private readonly IPasswordHasher passwordHasher;
 
         private List<PasswordRule> PasswordRules { get; set; }
 
-        public AuthenticationModule(HealthPassContext context, List<PasswordRule> passwordRules, IPasswordHasher passwordHasher)
+        public AuthenticationModule(HealthPassDataContext context, List<PasswordRule> passwordRules, IPasswordHasher passwordHasher)
         {
             this.context = context;
             PasswordRules = passwordRules;

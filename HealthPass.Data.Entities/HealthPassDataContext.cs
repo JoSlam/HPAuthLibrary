@@ -2,7 +2,7 @@
 
 namespace HealthPass.Data.Entities
 {
-    public class HealthPassContext : DbContext
+    public class HealthPassDataContext : DbContext
     {
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<LoginDetails> LoginDetails { get; set; }
@@ -10,7 +10,7 @@ namespace HealthPass.Data.Entities
 
         public string DbPath { get; }
 
-        public HealthPassContext()
+        public HealthPassDataContext()
         {
             var path = Environment.CurrentDirectory;
             DbPath = Path.Join(path, "healthpass.db");

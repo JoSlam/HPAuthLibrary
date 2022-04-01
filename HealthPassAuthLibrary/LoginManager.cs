@@ -11,9 +11,10 @@ namespace HealthPass.Auth.Core
         private readonly AuthenticationModule authModule;
         private readonly LockoutCriteria lockoutCriteria;
         private readonly TokenManager tokenManager;
-        private readonly HealthPassContext dbContext;
+        private readonly HealthPassDataContext dbContext;
 
-        public LoginManager(AuthenticationModule authModule, LockoutCriteria lockoutCriteria, TokenManager tokenManager, HealthPassContext dbContext)
+
+        public LoginManager(AuthenticationModule authModule, LockoutCriteria lockoutCriteria, TokenManager tokenManager, HealthPassDataContext dbContext)
         {
             this.authModule = authModule;
             this.lockoutCriteria = lockoutCriteria;

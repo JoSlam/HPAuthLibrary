@@ -6,14 +6,14 @@ using System.Linq;
 
 namespace HealthPass.Auth.Tests.Mock
 {
-    public class MockDBContext: HealthPassContext
+    public class MockDBContext: HealthPassDataContext
     {
         private List<User> Users = new List<User>();
         private List<LoginDetails> LoginDetails = new List<LoginDetails>();
         private List<BlockedSignature> BlockedSignatures = new List<BlockedSignature>();
         private readonly TableSeedHandler SeedHandler = new TableSeedHandler();
 
-        public HealthPassContext BuildMockContext()
+        public HealthPassDataContext BuildMockContext()
         {
             // Users DBSet setup
             var mockUsersSet = CreateDbSetMock(Users);
@@ -45,7 +45,7 @@ namespace HealthPass.Auth.Tests.Mock
             mockBlockedSignaturesSet.Setup(m => m.Remove(It.IsAny<BlockedSignature>())).Callback((BlockedSignature blocked) => BlockedSignatures.Remove(blocked));
 
 
-            Mock<HealthPassContext> mockDbContext = new Mock<HealthPassContext>();
+            Mock<HealthPassDataContext> mockDbContext = new Mock<HealthPassDataContext>();
             mockDbContext.Setup(i => i.Users).Returns(mockUsersSet.Object);
             mockDbContext.Setup(i => i.LoginDetails).Returns(mockLoginDetailsSet.Object);
 
