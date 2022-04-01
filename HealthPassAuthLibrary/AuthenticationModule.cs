@@ -9,12 +9,12 @@ namespace HealthPassAuthLibrary
         private readonly HealthPassDataContext context;
         private readonly IPasswordHasher passwordHasher;
 
-        private List<PasswordRule> PasswordRules { get; set; }
+        private List<PasswordRule> passwordRules { get; set; }
 
         public AuthenticationModule(HealthPassDataContext context, List<PasswordRule> passwordRules, IPasswordHasher passwordHasher)
         {
             this.context = context;
-            PasswordRules = passwordRules;
+            this.passwordRules = passwordRules;
             this.passwordHasher = passwordHasher;
         }
 
@@ -60,7 +60,7 @@ namespace HealthPassAuthLibrary
 
         private bool SetUserPassword(User user, string password)
         {
-            bool overallResult = PasswordRules.All(rule => PasswordRuleValidator.Execute(rule, password));
+            bool overallResult = passwordRules.All(rule => PasswordRuleValidator.Execute(rule, password));
 
             if (overallResult)
             {
