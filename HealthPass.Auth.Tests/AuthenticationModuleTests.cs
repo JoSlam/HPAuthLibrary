@@ -22,7 +22,6 @@ namespace HealthPass.Auth.Tests
         {
             mockDbContext = new MockDBContext().BuildMockContext();
             List<PasswordRule> passwordRules = new List<PasswordRule>();
-            LockoutCriteria userLockoutCriteria = new LockoutCriteria();
             IPasswordHasher passwordHasher = new MD5PasswordHasher();
 
             // Add test user
@@ -32,29 +31,37 @@ namespace HealthPass.Auth.Tests
             mockDbContext.Users.Add(testUser);
             mockDbContext.SaveChanges();
 
-            authModule = new AuthenticationModule(mockDbContext, passwordRules, userLockoutCriteria, passwordHasher);
+            authModule = new AuthenticationModule(mockDbContext, passwordRules, passwordHasher);
         }
 
         [TestMethod]
-        public void CanCreateUserInDB()
+        public void CanRegisterUser()
         {
-            User newUser = new User("Jane Johnson", "jane@example.com");
-            mockDbContext.Users.Add(newUser);
-            mockDbContext.SaveChanges();
+            UserDetails userDetails = new UserDetails()
+            {
+                Name = "Jane Johnson",
+                Email = "jane@example.com",
+                Password = "password123"
+            };
 
-            User fetchedUser = mockDbContext.Users.SingleOrDefault(i => i.Email == newUser.Email);
+            // Confirm result
+            bool result = authModule.RegisterUser(userDetails);
+            Assert.IsTrue(result);
+
+            // Confirm user added to database
+            User? fetchedUser = mockDbContext.Users.SingleOrDefault(i => i.Email == userDetails.Email);
             Assert.IsNotNull(fetchedUser);
-            Assert.AreEqual(fetchedUser.Name, newUser.Name);
+            Assert.AreEqual(fetchedUser.Name, userDetails.Name);
         }
 
         [TestMethod]
-        public void CanVerifyCredentials()
+        public void CanLoginUser()
         {
-            bool validResult = authModule.VerifyCredentials(testUser.Email, "password123");
-            Assert.IsTrue(validResult);
+            string validResult = authModule.LoginUser(testUser.Email, "password123");
+            Assert.IsTrue(!string.IsNullOrEmpty(validResult));
 
-            bool invalidResult = authModule.VerifyCredentials(testUser.Email, "example");
-            Assert.IsFalse(invalidResult);
+            string invalidResult = authModule.LoginUser(testUser.Email, "example");
+            Assert.IsTrue(string.IsNullOrEmpty(invalidResult));
         }
     }
 }
