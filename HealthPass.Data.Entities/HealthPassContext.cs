@@ -6,6 +6,7 @@ namespace HealthPass.Data.Entities
     {
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<LoginDetails> LoginDetails { get; set; }
+        public virtual DbSet<BlockedSignature> BlockedSignatures { get; set; }
 
         public string DbPath { get; }
 

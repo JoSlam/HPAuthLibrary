@@ -6,6 +6,7 @@ namespace HealthPass.Auth.Core
 {
     public class MD5PasswordHasher : IPasswordHasher
     {
+        //TODO: Add salt etc if necessary - Low priority (for this proj)
         public override string GeneratePasswordHash(string password)
         {
             byte[] passwordBytes = Encoding.ASCII.GetBytes(password);
