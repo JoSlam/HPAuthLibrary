@@ -1,6 +1,5 @@
 ﻿using HealthPass.Data.Entities;
 using HealthPass.Data.Entities.Interfaces;
-using HealthPassAuthLibrary;
 using System.Security.Cryptography;
 using System.Text;
 

@@ -16,7 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HealthPassAuthLibrary\HealthPass.Auth.Core.csproj" />
+    <ProjectReference Include="..\HealthPass.Data.Core\HealthPass.Auth.Core.csproj" />
+    <ProjectReference Include="..\HealthPass.Data.Entities\HealthPass.Data.Entities.csproj" />
   </ItemGroup>
 
 </Project>

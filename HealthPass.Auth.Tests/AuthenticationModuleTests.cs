@@ -2,7 +2,6 @@ using HealthPass.Auth.Core;
 using HealthPass.Auth.Tests.Mock;
 using HealthPass.Data.Entities;
 using HealthPass.Data.Entities.Interfaces;
-using HealthPassAuthLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,11 +56,11 @@ namespace HealthPass.Auth.Tests
         [TestMethod]
         public void CanLoginUser()
         {
-            string validResult = authModule.LoginUser(testUser.Email, "password123");
-            Assert.IsTrue(!string.IsNullOrEmpty(validResult));
+            bool validResult = authModule.LoginUser(testUser.Email, "password123");
+            Assert.IsTrue(validResult);
 
-            string invalidResult = authModule.LoginUser(testUser.Email, "example");
-            Assert.IsTrue(string.IsNullOrEmpty(invalidResult));
+            bool invalidResult = authModule.LoginUser(testUser.Email, "example");
+            Assert.IsFalse(invalidResult);
         }
     }
 }

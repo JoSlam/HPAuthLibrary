@@ -1,8 +1,7 @@
-﻿using HealthPass.Auth.Core;
-using HealthPass.Data.Entities;
+﻿using HealthPass.Data.Entities;
 using HealthPass.Data.Entities.Interfaces;
 
-namespace HealthPassAuthLibrary
+namespace HealthPass.Auth.Core
 {
     public class AuthenticationModule
     {

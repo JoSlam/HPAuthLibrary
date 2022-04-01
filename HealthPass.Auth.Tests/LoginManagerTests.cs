@@ -1,5 +1,4 @@
-﻿using HealthPass.Auth.Core;
-using HealthPass.Data.Entities.Interfaces;
+﻿using HealthPass.Data.Entities.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace HealthPass.Auth.Tests
