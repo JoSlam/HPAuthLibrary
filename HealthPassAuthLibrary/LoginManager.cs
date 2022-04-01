@@ -21,23 +21,25 @@ namespace HealthPass.Auth.Core
             this.dbContext = dbContext;
         }
 
-        public bool LoginUser(RequestDetails requestDetails, string email, string password)
+        public string LoginUser(RequestDetails requestDetails, string email, string password)
         {
             User? user = GetUser(email);
             if (user.IsLocked || IsRequestSignatureBlocked(requestDetails))
             {
-                return false;
+                return "";
             }
 
             bool result = authModule.LoginUser(email, password);
             HandleLoginResult(requestDetails, user, result);
-            return result;
+
+            return result ? tokenManager.GetToken(email) : "";
         }
 
 
-        public bool RegisterUser(RequestDetails requestDetails, UserDetails userDetails)
+        public string RegisterUser(RequestDetails requestDetails, UserDetails userDetails)
         {
-            return authModule.RegisterUser(userDetails);
+            bool result = authModule.RegisterUser(userDetails);
+            return result ? tokenManager.GetToken(userDetails.Email) : "";
         }
 
         public bool IsTokenValid(string token)
